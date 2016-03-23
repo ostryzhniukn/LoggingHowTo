@@ -13,5 +13,16 @@ public class App {
 		LOGGER.info("Message");
 		LOGGER.warn("Message");
 		LOGGER.error("Message");
+
+		try {
+			wrongMethod();
+		} catch (RuntimeException e) {
+			LOGGER.error("Some message.. ", e);
+		}
 	}
+
+	private static void wrongMethod() {
+		throw new RuntimeException("I'm a bad method");
+	}
+
 }
