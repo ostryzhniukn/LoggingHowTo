@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Configuration status="WARN" monitorInterval="60">
 	<Properties>
-		<Property name="logPath">C:/logs</Property>
+		<Property name="logPath">/logs</Property>
 		<Property name="defaultLayoutPattern">%level\t%d{MMM dd HH:mm:ss} %c{2}.%M: %m%n</Property>
 	</Properties>
 	<Appenders>
