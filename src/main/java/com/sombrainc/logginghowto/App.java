@@ -4,7 +4,8 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 public class App {
-	public static final Logger LOGGER = LoggerFactory.getLogger(App.class);
+
+	private static final Logger LOGGER = LoggerFactory.getLogger(App.class);
 
 	public static void main(String[] args) {
 		LOGGER.trace("Message");
@@ -12,6 +13,7 @@ public class App {
 		LOGGER.info("Message");
 		LOGGER.warn("Message");
 		LOGGER.error("Message");
+		System.out.println("Stupid message");
 		try {
 			wrongMethod();
 		} catch (RuntimeException e) {
