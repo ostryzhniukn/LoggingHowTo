@@ -1,16 +1,38 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Configuration status="WARN" monitorInterval="60">
 	<Properties>
-		<Property name="defaultLayoutPattern">%level\t%d{MMM dd HH:mm:ss} %c{2}.%M: %m%n</Property>
+		<Property name="defaultLayoutPattern">
+			%level\t%d{MMM dd HH:mm:ss} %c{2}.%M: %m%n</Property>
+		<Property name="logPath">/logs/app</Property>
 	</Properties>
 	<Appenders>
 		<Console name="STDOUT" target="SYSTEM_OUT">
 			<PatternLayout pattern="${defaultLayoutPattern}"/>
 		</Console>
+		<RollingRandomAccessFile name="RollingRandomAccessFileInfo"
+								 fileName="${logPath}/INFO/app.log"
+								 filePattern="${logPath}/INFO/app-%d{yyyy-MM-dd}-%i.log">
+			<PatternLayout pattern="${defaultLayoutPattern}"/>
+			<ThresholdFilter level="INFO" onMatch="ACCEPT" onMismatch="DENY"/>
+			<Policies>
+				<TimeBasedTriggeringPolicy/>
+				<SizeBasedTriggeringPolicy size="9 MB"/>
+				<OnStartupTriggeringPolicy/>
+			</Policies>
+			<DefaultRolloverStrategy max="10">
+				<Delete basePath="${logPath}/INFO/" maxDepth="2">
+					<IfAny>
+						<IfLastModified age="30d"/>
+						<IfAccumulatedFileSize exceeds="1024 MB"/>
+					</IfAny>
+				</Delete>
+			</DefaultRolloverStrategy>
+		</RollingRandomAccessFile>
 	</Appenders>
 	<Loggers>
 		<AsyncRoot level="INFO" includeLocation="true">
 			<AppenderRef ref="STDOUT"/>
+			<AppenderRef ref="RollingRandomAccessFileInfo"/>
 		</AsyncRoot>
 	</Loggers>
 </Configuration>
